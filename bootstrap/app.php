@@ -8,6 +8,8 @@ date_default_timezone_set(env('APP_TIMEZONE', 'UTC'));
 
 $app = new Laravel\Lumen\Application(dirname(__DIR__));
 
+$app->configure('cors');
+
 // Facades e Http Client
 $app->withFacades();
 
@@ -19,9 +21,9 @@ $app->singleton(Illuminate\Contracts\Console\Kernel::class, App\Console\Kernel::
 $app->configure('app');
 
 // Middleware - registre o seu CORS aqui se quiser
-//$app->middleware([
-//    App\Http\Middleware\CorsMiddleware::class,
-//]);
+$app->middleware([
+    App\Http\Middleware\CorsMiddleware::class,
+]);
 
 // Rotas
 $app->router->group(['namespace' => 'App\Http\Controllers'], function ($router) {
